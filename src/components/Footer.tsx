@@ -4,6 +4,8 @@ import colors from "../util/colors"
 import Container from "./Container"
 import Typography from "./Typography"
 
+import Logo from "../assets/Footer Logo.svg"
+
 function FooterColumn({ children, className, ...props }: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) {
     return (
         <div className={cn("flex flex-col flex-grow", className)} {...props}>
@@ -36,7 +38,7 @@ function Footer() {
         <footer className={cn("flex items-center justify-center py-10", colors.bg.primary.green)}>
             <Container className="flex flex-row flex-wrap gap-10">
                 <FooterColumn>
-                    <img src="" alt="company logo" />
+                    <img height={`250px`} width={`150px`} src={Logo} alt="company logo" />
                 </FooterColumn>
                 <FooterColumn>
                     <FooterLinks title="Doormat Navigation">
