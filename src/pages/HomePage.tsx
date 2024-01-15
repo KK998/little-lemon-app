@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
+
 import Button from "../components/Button";
 import Typography from "../components/Typography";
+import Container from "../components/Container";
+import FoodCard from "../components/FoodCard";
+
 import Default from "../layouts/Default";
+
 import colors from "../util/colors";
 import cn from "../util/cn";
-import Container from "../components/Container";
 
 import HomePageHero from "../assets/HomePageHero.svg";
-import FoodCard from "../components/FoodCard";
+import Testimonials from "../components/Testimonials";
 
 function HeroSection() {
     return (
@@ -91,6 +95,7 @@ function HomePage() {
         <Default>
             <HeroSection />
             <ThisWeekSpecials />
+            <Testimonials />
         </Default>
     );
 }
