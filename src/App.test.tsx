@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+
+import { render } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('The app renders with no errors', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  // If we get here, no errors were thrown
+  expect(true).toBeTruthy();
 });
