@@ -3,7 +3,7 @@ import cn from "../util/cn";
 import colors from "../util/colors";
 import Typography from "./Typography";
 
-const ButtonVariants = cva("h-[50px] max-w-full flex items-center justify-center gap-5", {
+const ButtonVariants = cva("h-[50px] py-4 px-20 rounded-2xl max-w-full flex items-center justify-center gap-5", {
     variants: {
         kind: {
             yellow: cn(colors.bg.primary.yellow, colors.text.secondary.black),

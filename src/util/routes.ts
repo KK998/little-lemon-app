@@ -17,7 +17,7 @@ export default [
     },
     {
         name: 'Order online',
-        path: '/order',
+        path: '/order-online',
     },
     {
         name: 'Login',

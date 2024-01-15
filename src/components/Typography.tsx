@@ -13,7 +13,7 @@ type TypographyStyles = |
 type Props = React.PropsWithChildren<{
     className?: string
     tag?: React.ElementType
-    type: TypographyStyles
+    type?: TypographyStyles
 }>
 
 function Typography({ className, children, tag, type = 'Regular text' }: Props) {
