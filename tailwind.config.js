@@ -5,12 +5,6 @@ module.exports = {
   ],
   theme: {
     container: {
-      /* // you can configure the container to be centered
-      center: true, */
-
-      // or have default horizontal padding
-      padding: '1rem',
-
       screens: {
         sm: '100%',
         md: '728px',

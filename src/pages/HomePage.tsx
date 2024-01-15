@@ -7,6 +7,7 @@ import cn from "../util/cn";
 import Container from "../components/Container";
 
 import HomePageHero from "../assets/HomePageHero.svg";
+import FoodCard from "../components/FoodCard";
 
 function HeroSection() {
     return (
@@ -43,10 +44,53 @@ function HeroSection() {
     );
 }
 
+function ThisWeekSpecials() {
+    return (
+        <section className="flex flex-col gap-10 py-16">
+            <Container>
+                <div className="flex justify-between items-center mb-10">
+                    <Typography tag="h3" type="Display title" className={colors.text.secondary.black}>
+                        This week's specials!
+                    </Typography>
+                    <Button kind="yellow">
+                        <Link to={"/menu"}>
+                            Online Menu
+                        </Link>
+                    </Button>
+                </div>
+                <div className="flex flex-wrap gap-5">
+                    <FoodCard
+                        name="Greek Salad"
+                        price={12.99}
+                        link="/menu"
+                        description="Freshly cut tomatoes, cucumbers, onions, olives, and feta cheese. Served with our homemade dressing."
+                        image="https://images.pexels.com/photos/1059905/pexels-photo-1059905.jpeg?auto=compress&cs=tinysrgb&w=640&h=360&dpr=1"
+                    />
+                    <FoodCard
+                        name="Bruchetta"
+                        price={5.99}
+                        link="/menu"
+                        description="Our Bruchetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil."
+                        image="https://images.pexels.com/photos/4969892/pexels-photo-4969892.jpeg?auto=compress&cs=tinysrgb&w=640&h=360&dpr=1"
+                    />
+                    <FoodCard
+                        name="Lemon Desser"
+                        price={5.0}
+                        link="/menu"
+                        description="This comes straight from grandma's recipe book, every last ingredient has been sourced and is as authentic as can be imagined."
+                        image="https://images.pexels.com/photos/8085289/pexels-photo-8085289.jpeg?auto=compress&cs=tinysrgb&w=640&h=360&dpr=1"
+                    />
+                </div>
+            </Container>
+        </section>
+    )
+}
+
 function HomePage() {
     return (
         <Default>
             <HeroSection />
+            <ThisWeekSpecials />
         </Default>
     );
 }
