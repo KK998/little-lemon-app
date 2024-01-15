@@ -1,4 +1,4 @@
-import { cn } from "../util/cn"
+import cn from "../util/cn"
 
 type TypographyStyles = |
     'Display title' |
@@ -13,13 +13,13 @@ type TypographyStyles = |
 type Props = React.PropsWithChildren<{
     className?: string
     tag?: React.ElementType
-    style?: TypographyStyles
-}> & React.HTMLAttributes<JSX.IntrinsicElements>
+    type: TypographyStyles
+}>
 
-function Typography({ className, children, tag, style = 'Regular text', ...props }: Props) {
+function Typography({ className, children, tag, type = 'Regular text' }: Props) {
     const Element = tag || 'p'
 
-    switch (style) {
+    switch (type) {
         case 'Display title':
             className = cn('text-6xl font-medium markazi', className)
             break
@@ -38,16 +38,16 @@ function Typography({ className, children, tag, style = 'Regular text', ...props
         case 'Card title':
             className = cn('text-base font-bold karla', className)
             break
-        case 'Regular text':
-            className = cn('text-base karla', className)
-            break
         case 'Highlight text':
             className = cn('text-base font-medium karla', className)
+            break
+        default:
+            className = cn('text-base karla', className)
             break
     }
 
     return (
-        <Element className={className} {...props}>{children}</Element>
+        <Element className={className}>{children}</Element>
     )
 }
 

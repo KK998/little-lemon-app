@@ -1,4 +1,4 @@
-import { cn } from "../util/cn"
+import cn from "../util/cn"
 
 type Props = React.PropsWithChildren<{
     className?: string
