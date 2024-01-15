@@ -12,6 +12,7 @@ import cn from "../util/cn";
 
 import HomePageHero from "../assets/HomePageHero.svg";
 import Testimonials from "../components/Testimonials";
+import About from "../components/About";
 
 function HeroSection() {
     return (
@@ -96,6 +97,7 @@ function HomePage() {
             <HeroSection />
             <ThisWeekSpecials />
             <Testimonials />
+            <About />
         </Default>
     );
 }
