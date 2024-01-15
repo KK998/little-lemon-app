@@ -34,7 +34,7 @@ function HeroSection() {
                     height={`353px`}
                     width={`380px`}
                     loading="eager"
-                    className="absolute right-0 top-0"
+                    className="absolute right-0 top-0 max-w-full object-cover"
                     src={HomePageHero}
                     alt="Man with food"
                 />
