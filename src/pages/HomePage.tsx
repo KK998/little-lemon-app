@@ -27,10 +27,10 @@ function HeroSection() {
                             Chicago
                         </Typography>
                     </div>
-                    <Typography type="Lead text" className={colors.text.secondary.white}>
+                    <Typography type="Lead text" className={cn(colors.text.secondary.white, "w-[210px] max-w-full")}>
                         We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.
                     </Typography>
-                    <Button kind="yellow">
+                    <Button kind="yellow" className="w-[250px] max-w-full whitespace-nowrap">
                         <Link to={"/reservations"}>
                             Reserve a table
                         </Link>
