@@ -1,12 +1,13 @@
-import Typography from "../components/Typography"
 import Default from "../layouts/Default"
+
+import About from "../components/About"
+import Testimonials from "../components/Testimonials"
 
 function OrderOnline() {
     return (
         <Default>
-            <Typography type="Display title">
-                Order Online
-            </Typography>
+            <About />
+            <Testimonials />
         </Default>
     )
 }

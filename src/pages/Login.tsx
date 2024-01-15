@@ -1,12 +1,12 @@
-import Typography from "../components/Typography"
+import About from "../components/About"
+import Testimonials from "../components/Testimonials"
 import Default from "../layouts/Default"
 
 function Login() {
     return (
         <Default>
-            <Typography type="Display title">
-                Login
-            </Typography>
+            <About />
+            <Testimonials />
         </Default>
     )
 }
