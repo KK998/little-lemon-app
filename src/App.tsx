@@ -1,6 +1,10 @@
+import Default from "./layouts/Default";
+
 function App() {
   return (
-    <div />
+    <Default>
+      <h1>Little Lemon Restaurant</h1>
+    </Default>
   );
 }
 

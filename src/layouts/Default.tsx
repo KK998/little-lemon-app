@@ -1,9 +1,10 @@
+import Navbar from "../components/Navbar"
+
 function Default({ children }: React.PropsWithChildren) {
     return (
         <main className="flex flex-col">
-            <>
-                {children}
-            </>
+            <Navbar />
+            {children}
         </main>
     )
 }
