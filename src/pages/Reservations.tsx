@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 
 import Hero from "../components/Hero"
 import Typography from "../components/Typography"
@@ -6,13 +7,13 @@ import Testimonials from "../components/Testimonials";
 import About from "../components/About";
 import Button from "../components/Button";
 import FormField from "../components/FormField";
+import Container from "../components/Container";
 import Default from "../layouts/Default"
 
 import cn from "../util/cn";
 import colors from "../util/colors";
 
 import ReservationJPEG from "../assets/reservation.jpeg";
-import Container from "../components/Container";
 
 type ReservationStep = "FORM" | "CONFIRMATION" | "SUCCESS"
 
@@ -29,13 +30,24 @@ type ReservationFormFields = {
 
 const MAXIMUM_NUMBER_OF_PEOPLE = 50
 
+const DEFAULT_FORM_FIELDS: ReservationFormFields = {
+    firstName: "",
+    lastName: "",
+    date: new Date().toISOString().split("T")[0], // current date
+    time: new Date().toISOString().split("T")[1].split(":").slice(0, 2).join(":"), // current time (hour:minutes)
+    numberOfPeople: 1,
+    occasion: "",
+    alergens: "",
+    notes: ""
+};
+
 function FormRow({ children, className, ...props }: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) {
     return <div className={cn("flex flex-wrap gap-5", className)} {...props}>{children}</div>
 }
 
 function ReservationEntry({ label, value }: { label: string, value: string | number }) {
     return (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col">
             <Typography tag="p" type="Section categories" className={cn(colors.text.secondary.black)}>
                 {label}:
             </Typography>
@@ -116,10 +128,11 @@ function ReservationForm() {
                             name="occasion"
                             value={formFields.occasion}
                             onChange={(e) => setFormFields({ ...formFields, occasion: e.target.value })}>
+                            <option selected value="Other">Other</option>
                             <option value="Birthday">Birthday</option>
                             <option value="Anniversary">Anniversary</option>
                             <option value="Business">Business</option>
-                            <option value="Other">Other</option>
+                            <option value="Wedding">Wedding</option>
                         </FormField.Select>
                     </FormField>
                 </FormRow>
@@ -205,7 +218,43 @@ function ReservationConfirmation() {
 }
 
 function ReservationSuccess() {
-    return <div />
+    const { formFields, setFormFields } = useReservationContext()
+
+    const qrUrl = new URL("https://api.qrserver.com/v1/create-qr-code/");
+    qrUrl.searchParams.append("size", "250x250");
+    qrUrl.searchParams.append("data", JSON.stringify({
+        "First Name": formFields.firstName,
+        "Last Name": formFields.lastName,
+        "Date of reservation": formFields.date,
+        "Time of reservation": formFields.time,
+        "Number of people": formFields.numberOfPeople,
+        "Occasion": formFields.occasion,
+        "Alergens": formFields.alergens,
+        "Additional notes": formFields.notes
+    }));
+
+    setFormFields(DEFAULT_FORM_FIELDS);
+
+    return (
+        <Container className="flex flex-col justify-center items-center gap-10 grow h-auto">
+            <div className="flex flex-col justify-center text-center gap-0">
+                <Typography tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
+                    Thank you for your reservation!
+                </Typography>
+                <Typography tag={"p"} type="Lead text" className={colors.text.secondary.black}>
+                    Show this QR code at reception.
+                </Typography>
+            </div>
+            <div className="flex flex-col items-center justify-center p-5">
+                <img src={qrUrl.toString()} alt="QR code" className="object-contain" />
+            </div>
+            <Link to="/">
+                <Button>
+                    Back to home
+                </Button>
+            </Link>
+        </Container>
+    )
 }
 
 function stepToComponent(step: ReservationStep) {
@@ -259,16 +308,7 @@ const useReservationContext = () => {
 
 function Reservations() {
     const [step, setStep] = useState<ReservationStep>("FORM")
-    const [formFields, setFormFields] = useState<ReservationFormFields>({
-        firstName: "",
-        lastName: "",
-        date: new Date().toISOString().split("T")[0], // current date
-        time: new Date().toISOString().split("T")[1].split(":").slice(0, 2).join(":"), // current time (hour:minutes)
-        numberOfPeople: 1,
-        occasion: "",
-        alergens: "",
-        notes: ""
-    })
+    const [formFields, setFormFields] = useState<ReservationFormFields>(DEFAULT_FORM_FIELDS)
 
     return (
         <ReservationContext.Provider value={{ formFields, setFormFields, step, setStep }}>
