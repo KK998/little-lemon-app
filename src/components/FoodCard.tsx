@@ -24,7 +24,7 @@ function FoodCard({
 }: Props) {
     const formattedPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
     return (
-        <article className={cn("flex w-full sm:w-1/2 md:w-1/4 flex-col flex-grow rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow", className)} {...props}>
+        <article data-testid="food-card" className={cn("flex w-full sm:w-1/2 md:w-1/4 flex-col flex-grow rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow", className)} {...props}>
             <Link to={link} role='link'>
                 <img src={image} alt={name} className='w-full h-[200px] object-cover' />
             </Link>
@@ -42,7 +42,7 @@ function FoodCard({
                 <Typography tag="p" type="Regular text" className={cn(colors.text.secondary.black, "mb-4")}>
                     {description}
                 </Typography>
-                <Link to={link} role='link' className='flex items-center mt-auto'>
+                <Link data-testid="food-card--link" to={link} role='link' className='flex items-center mt-auto'>
                     <Typography tag="p" type="Highlight text" className={colors.text.secondary.black}>
                         Order a delivery
                     </Typography>

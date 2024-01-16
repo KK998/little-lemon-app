@@ -16,21 +16,21 @@ import About from "../components/About";
 
 function HeroSection() {
     return (
-        <section className={cn("flex items-center justify-center py-10 mb-20", colors.bg.primary.green)}>
+        <section data-testid="hero-section" className={cn("flex items-center justify-center py-10 mb-20", colors.bg.primary.green)}>
             <Container className="relative">
                 <section className="flex flex-col gap-5 max-w-full sm:max-w-sm mr-auto">
                     <div className="flex flex-col gap-0">
-                        <Typography tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
+                        <Typography data-testid="hero-section--title" tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
                             Little Lemon
                         </Typography>
-                        <Typography tag={"h3"} type="Sub title" className={colors.text.secondary.white}>
+                        <Typography data-testid="hero-section--subtitle" tag={"h3"} type="Sub title" className={colors.text.secondary.white}>
                             Chicago
                         </Typography>
                     </div>
                     <Typography type="Lead text" className={cn(colors.text.secondary.white, "w-[210px] max-w-full")}>
                         We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.
                     </Typography>
-                    <Button kind="yellow" className="w-[250px] max-w-full whitespace-nowrap" role="link">
+                    <Button data-testid="hero-section--link" kind="yellow" className="w-[250px] max-w-full whitespace-nowrap" role="link">
                         <Link to={"/reservations"}>
                             Reserve a table
                         </Link>
@@ -51,19 +51,19 @@ function HeroSection() {
 
 function ThisWeekSpecials() {
     return (
-        <section className="flex flex-col gap-10 py-16">
+        <section data-testid="specials-section" className="flex flex-col gap-10 py-16">
             <Container>
                 <section className="flex justify-between items-center mb-10">
-                    <Typography tag="h3" type="Display title" className={colors.text.secondary.black}>
+                    <Typography data-testid="specials-section--title" tag="h3" type="Display title" className={colors.text.secondary.black}>
                         This week's specials!
                     </Typography>
-                    <Button kind="yellow">
+                    <Button kind="yellow" data-testid="specials-section--link">
                         <Link to={"/menu"}>
                             Online Menu
                         </Link>
                     </Button>
                 </section>
-                <article className="flex flex-wrap gap-5">
+                <article data-testid="specials-section--cards" className="flex flex-wrap gap-5">
                     <FoodCard
                         name="Greek Salad"
                         price={12.99}

@@ -8,7 +8,7 @@ function Default({ children, className }: React.PropsWithChildren<{
     return (
         <main className="flex flex-col min-h-[100vh]">
             <Navbar />
-            <section className={cn("flex flex-col flex-grow", className)}>
+            <section data-testid="children-container" className={cn("flex flex-col flex-grow", className)}>
                 {children}
             </section>
             <Footer />

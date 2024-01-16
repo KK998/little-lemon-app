@@ -20,7 +20,7 @@ function TestimonialCard({
     ...props
 }: TestimonialCardProps) {
     return (
-        <article className={cn('flex flex-col p-5 gap-2 rounded-xl shadow-xl w-full sm:w-1/2 md:w-1/5 flex-grow', colors.bg.secondary.white, className)} {...props}>
+        <article data-testid="testimonial" className={cn('flex flex-col p-5 gap-2 rounded-xl shadow-xl w-full sm:w-1/2 md:w-1/5 flex-grow', colors.bg.secondary.white, className)} {...props}>
             <Typography tag="p" type='Lead text' className={colors.text.secondary.black}>
                 {rating} / 5
             </Typography>
@@ -40,8 +40,8 @@ function TestimonialCard({
 
 function Testimonials() {
     return (
-        <section className={cn('flex flex-col items-center justify-center gap-5 py-32', colors.bg.primary.green)}>
-            <Typography tag="h3" type='Display title' className={colors.text.secondary.white}>
+        <section data-testid="testimonials" className={cn('flex flex-col items-center justify-center gap-5 py-32', colors.bg.primary.green)}>
+            <Typography data-testid="testimonials--title" tag="h3" type='Display title' className={colors.text.secondary.white}>
                 Testimonials
             </Typography>
             <Container className='flex flex-wrap gap-5'>

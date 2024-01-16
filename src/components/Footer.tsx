@@ -53,8 +53,8 @@ function Footer() {
                 </FooterColumn>
                 <FooterColumn>
                     <FooterLinks role="contentinfo" title="Contact">
-                        <address>Imaginary Streen 3rd Avenue</address>
-                        <address>1000 CA, USA</address>
+                        <span>Imaginary Streen 3rd Avenue</span>
+                        <span>1000 CA, USA</span>
                         <br />
                         <span>+123 456 789</span>
                         <span>support@littlelemon.com</span>
