@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 import Hero from "../components/Hero"
 import Typography from "../components/Typography"
@@ -12,6 +12,7 @@ import cn from "../util/cn";
 import colors from "../util/colors";
 
 import ReservationJPEG from "../assets/reservation.jpeg";
+import Container from "../components/Container";
 
 type ReservationStep = "FORM" | "CONFIRMATION" | "SUCCESS"
 
@@ -28,8 +29,21 @@ type ReservationFormFields = {
 
 const MAXIMUM_NUMBER_OF_PEOPLE = 50
 
-function FormRow({ children }: React.PropsWithChildren<{}>) {
-    return <div className="flex flex-wrap gap-5">{children}</div>
+function FormRow({ children, className, ...props }: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) {
+    return <div className={cn("flex flex-wrap gap-5", className)} {...props}>{children}</div>
+}
+
+function ReservationEntry({ label, value }: { label: string, value: string | number }) {
+    return (
+        <div className="flex flex-col gap-1">
+            <Typography tag="p" type="Section categories" className={cn(colors.text.secondary.black)}>
+                {label}:
+            </Typography>
+            <Typography tag="p" type="Lead text" className={cn(colors.text.secondary.black)}>
+                {value}
+            </Typography>
+        </div>
+    )
 }
 
 function ReservationForm() {
@@ -51,6 +65,7 @@ function ReservationForm() {
                             value={formFields.firstName}
                             onChange={(e) => setFormFields({ ...formFields, firstName: e.target.value })}
                             required
+                            placeholder="John"
                         />
                     </FormField>
                     <FormField label="Last Name" name="lastName">
@@ -60,6 +75,7 @@ function ReservationForm() {
                             value={formFields.lastName}
                             onChange={(e) => setFormFields({ ...formFields, lastName: e.target.value })}
                             required
+                            placeholder="Doe"
                         />
                     </FormField>
                 </FormRow>
@@ -96,12 +112,15 @@ function ReservationForm() {
                         />
                     </FormField>
                     <FormField label="Occasion" name="occasion">
-                        <FormField.Input
+                        <FormField.Select
                             name="occasion"
-                            type="text"
                             value={formFields.occasion}
-                            onChange={(e) => setFormFields({ ...formFields, occasion: e.target.value })}
-                        />
+                            onChange={(e) => setFormFields({ ...formFields, occasion: e.target.value })}>
+                            <option value="Birthday">Birthday</option>
+                            <option value="Anniversary">Anniversary</option>
+                            <option value="Business">Business</option>
+                            <option value="Other">Other</option>
+                        </FormField.Select>
                     </FormField>
                 </FormRow>
                 <FormRow>
@@ -111,19 +130,21 @@ function ReservationForm() {
                             type="text"
                             value={formFields.alergens}
                             onChange={(e) => setFormFields({ ...formFields, alergens: e.target.value })}
+                            placeholder="No alergens"
                         />
                     </FormField>
                 </FormRow>
                 <FormRow>
-                    <FormField label="Notes" name="notes">
+                    <FormField label="Additional Notes" name="notes">
                         <FormField.TextArea
                             name="notes"
                             value={formFields.notes}
                             onChange={(e) => setFormFields({ ...formFields, notes: e.target.value })}
+                            rows={5}
                         />
                     </FormField>
                 </FormRow>
-                <FormRow>
+                <FormRow className="mt-5">
                     <Button kind={"yellow"} className="mx-auto" buttonType="submit">
                         Reserve table
                     </Button>
@@ -134,7 +155,53 @@ function ReservationForm() {
 }
 
 function ReservationConfirmation() {
-    return <div />
+    const { formFields, setStep } = useReservationContext()
+
+    const handleEditReservation = () => {
+        setStep("FORM")
+    }
+
+    const handleConfirmReservation = () => {
+        setStep("SUCCESS")
+    }
+
+    const formattedDate = useMemo(() => new Date(formFields.date).toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    }), [formFields.date])
+
+    return (
+        <Container className="flex flex-col gap-5 py-16">
+            <div className="flex flex-col gap-0">
+                <Typography tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
+                    Table reservation
+                </Typography>
+                <Typography tag={"h2"} type="Sub title" className={colors.text.secondary.black}>
+                    Chicago
+                </Typography>
+            </div>
+            <div className="flex flex-col gap-3">
+                <ReservationEntry label="First Name" value={formFields.firstName} />
+                <ReservationEntry label="Last Name" value={formFields.lastName} />
+                <ReservationEntry label="Date Of Arrival" value={formattedDate} />
+                <ReservationEntry label="Time Of Arrival" value={formFields.time} />
+                <ReservationEntry label="Number Of People" value={`${formFields.numberOfPeople} person`} />
+                <ReservationEntry label="Occasion" value={formFields.occasion} />
+                <ReservationEntry label="Alergens" value={formFields.alergens || "No alergens"} />
+                <ReservationEntry label="Additional Notes" value={formFields.notes || "No additional notes"} />
+            </div>
+            <div className="flex flex-wrap items-start justify-start gap-5">
+                <Button kind="white" onClick={handleEditReservation}>
+                    Edit reservation
+                </Button>
+                <Button kind="yellow" onClick={handleConfirmReservation}>
+                    Confirm reservation
+                </Button>
+            </div>
+        </Container>
+    )
 }
 
 function ReservationSuccess() {

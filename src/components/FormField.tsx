@@ -3,11 +3,23 @@ import colors from '../util/colors'
 import Typography from './Typography'
 
 function Input({ name, type = "text", className, ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
-  return <input className={cn("flex items-center h-10 px-3 font-medium text-base rounded-2xl shadow-xl focus-within:outline-none focus-within:shadow", colors.bg.secondary.white, className)} name={name} type={type} {...props} />
+  return <input className={cn(`outline-none transition-all flex items-center h-10 px-3 font-medium text-base rounded-2xl shadow-xl focus-within:shadow border border-solid border-secondary-white focus-within:border-primary-green`, colors.bg.secondary.white, colors.text.secondary.black, className)} name={name} type={type} {...props} />
 }
 
 function TextArea({ name, className, ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return <textarea className={cn("p-3 font-medium text-base rounded-2xl shadow-xl focus-within:outline-none focus-within:shadow", className)} name={name} {...props} />
+  return <textarea className={cn(`outline-none transition-all p-3 font-medium text-base rounded-2xl shadow-xl focus-within:shadow border border-solid border-secondary-white focus-within:border-primary-green`, colors.bg.secondary.white, colors.text.secondary.black, className)} name={name} {...props} />
+}
+
+function Select({ name, className, children, ...props }: React.SelectHTMLAttributes<HTMLSelectElement>) {
+  return (
+    <select
+      className={cn(`outline-none transition-all px-3 h-10 font-medium text-base rounded-2xl shadow-xl focus-within:shadow border border-solid border-secondary-white focus-within:border-primary-green`, colors.bg.secondary.white, colors.text.secondary.black, className)}
+      name={name}
+      {...props}
+    >
+      {children}
+    </select>
+  )
 }
 
 type Props = React.PropsWithChildren<{
@@ -28,5 +40,6 @@ function FormField({ children, label, name }: Props) {
 
 FormField.Input = Input;
 FormField.TextArea = TextArea;
+FormField.Select = Select;
 
 export default FormField

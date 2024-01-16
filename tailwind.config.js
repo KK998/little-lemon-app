@@ -11,7 +11,16 @@ module.exports = {
         lg: '861px',
       },
     },
-    extend: {},
+    extend: {
+      colors: {
+        "primary-green": '#495E57',
+        "primary-yellow": '#F4CE14',
+        "secondary-orange": '#EE9972',
+        "secondary-light-brown": '#FBDABB',
+        "secondary-white": '#EDEFEE',
+        "secondary-black": '#333333'
+      }
+    },
   },
   plugins: [],
 }
