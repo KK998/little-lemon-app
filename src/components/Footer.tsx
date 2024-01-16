@@ -19,30 +19,30 @@ function FooterLinks({ children, className, title, ...props }: React.PropsWithCh
     title: string
 }>) {
     return (
-        <div role="contentinfo" className={cn("flex flex-col gap-5", className)} {...props}>
+        <section role="contentinfo" className={cn("flex flex-col gap-5", className)} {...props}>
             <Typography type="Section categories" className={colors.text.secondary.white} role="columnheader">
                 {title}
             </Typography>
-            <nav role="list">
+            <ul>
                 {React.Children.map(children, (child) => (
                     <Typography type="Regular text" className={colors.text.secondary.white}>
                         {child}
                     </Typography>
                 ))}
-            </nav>
-        </div>
+            </ul>
+        </section>
     )
 }
 
 function Footer() {
     return (
-        <footer className={cn("flex items-center justify-center py-10", colors.bg.primary.green)}>
+        <footer data-testid="footer" className={cn("flex items-center justify-center py-10", colors.bg.primary.green)}>
             <Container className="flex flex-row flex-wrap gap-10">
                 <FooterColumn>
-                    <img height={`250px`} width={`150px`} src={Logo} alt="company logo" />
+                    <img data-testid="footer-logo" height={`250px`} width={`150px`} src={Logo} alt="company logo" />
                 </FooterColumn>
                 <FooterColumn>
-                    <FooterLinks title="Doormat Navigation">
+                    <FooterLinks role="navigation" title="Doormat Navigation">
                         <Link role="link" to="/">Home</Link>
                         <Link role="link" to="/about">About</Link>
                         <Link role="link" to="/menu">Menu</Link>
