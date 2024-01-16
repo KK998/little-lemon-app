@@ -14,9 +14,10 @@ type Props = React.PropsWithChildren<{
     className?: string
     tag?: React.ElementType
     type?: TypographyStyles
+    htmlFor?: string
 }>
 
-function Typography({ className, children, tag, type = 'Regular text' }: Props) {
+function Typography({ className, children, tag, type = 'Regular text', ...props }: Props) {
     const Element = tag || 'p'
 
     switch (type) {
@@ -47,7 +48,7 @@ function Typography({ className, children, tag, type = 'Regular text' }: Props) 
     }
 
     return (
-        <Element className={className}>{children}</Element>
+        <Element className={className} {...props}>{children}</Element>
     )
 }
 

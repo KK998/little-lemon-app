@@ -16,17 +16,17 @@ const ButtonVariants = cva("h-[50px] py-4 px-20 rounded-2xl max-w-full flex item
     }
 });
 
-type Props = React.PropsWithChildren & React.HTMLAttributes<HTMLButtonElement> & VariantProps<typeof ButtonVariants>;
+type Props = React.PropsWithChildren<React.HTMLAttributes<HTMLButtonElement> & VariantProps<typeof ButtonVariants> & {
+    buttonType?: "button" | "submit" | "reset"
+}>;
 
-function Button({ children, className, kind, ...props }: Props) {
+function Button({ children, className, kind, buttonType, ...props }: Props) {
     return (
-        <Typography
-            className={ButtonVariants({ kind, className })}
-            tag="button"
-            type="Card title"
-            {...props}>
-            {children}
-        </Typography>
+        <button className={ButtonVariants({ kind, className })} type={buttonType} {...props}>
+            <Typography type="Card title">
+                {children}
+            </Typography>
+        </button>
     )
 }
 
