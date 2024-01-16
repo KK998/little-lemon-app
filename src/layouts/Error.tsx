@@ -13,22 +13,20 @@ function Error() {
     const message = error?.message || "";
 
     return (
-        <Default className="flex flex-col justify-center items-center">
-            <div className="flex flex-col items-center justify-center text-center">
-                <Typography type="Display title" tag={"h1"}>
-                    Oops!
-                </Typography>
-                <Typography>Sorry, an unexpected error has occurred.</Typography>
-                <p>
-                    <i>{message}</i>
-                </p>
-                <br />
-                <Link to="/">
-                    <Button kind={"yellow"}>
-                        Return to the home page
-                    </Button>
-                </Link>
-            </div>
+        <Default className="flex flex-col items-center justify-center text-center">
+            <Typography type="Display title" tag={"h1"}>
+                Oops!
+            </Typography>
+            <Typography>Sorry, an unexpected error has occurred.</Typography>
+            <p>
+                <i>{message}</i>
+            </p>
+            <br />
+            <Link to="/">
+                <Button kind={"yellow"}>
+                    Return to the home page
+                </Button>
+            </Link>
         </Default>
     )
 }

@@ -1,3 +1,4 @@
+import React from "react"
 import cn from "../util/cn"
 
 type TypographyStyles = |
@@ -15,7 +16,7 @@ type Props = React.PropsWithChildren<{
     tag?: React.ElementType
     type?: TypographyStyles
     htmlFor?: string
-}>
+}> & React.HTMLAttributes<HTMLDivElement>
 
 function Typography({ className, children, tag, type = 'Regular text', ...props }: Props) {
     const Element = tag || 'p'

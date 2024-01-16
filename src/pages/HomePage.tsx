@@ -18,7 +18,7 @@ function HeroSection() {
     return (
         <section className={cn("flex items-center justify-center py-10 mb-20", colors.bg.primary.green)}>
             <Container className="relative">
-                <div className="flex flex-col gap-5 max-w-full sm:max-w-sm mr-auto">
+                <section className="flex flex-col gap-5 max-w-full sm:max-w-sm mr-auto">
                     <div className="flex flex-col gap-0">
                         <Typography tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
                             Little Lemon
@@ -30,12 +30,12 @@ function HeroSection() {
                     <Typography type="Lead text" className={cn(colors.text.secondary.white, "w-[210px] max-w-full")}>
                         We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.
                     </Typography>
-                    <Button kind="yellow" className="w-[250px] max-w-full whitespace-nowrap">
+                    <Button kind="yellow" className="w-[250px] max-w-full whitespace-nowrap" role="link">
                         <Link to={"/reservations"}>
                             Reserve a table
                         </Link>
                     </Button>
-                </div>
+                </section>
                 <img
                     height={`353px`}
                     width={`380px`}
@@ -53,7 +53,7 @@ function ThisWeekSpecials() {
     return (
         <section className="flex flex-col gap-10 py-16">
             <Container>
-                <div className="flex justify-between items-center mb-10">
+                <section className="flex justify-between items-center mb-10">
                     <Typography tag="h3" type="Display title" className={colors.text.secondary.black}>
                         This week's specials!
                     </Typography>
@@ -62,8 +62,8 @@ function ThisWeekSpecials() {
                             Online Menu
                         </Link>
                     </Button>
-                </div>
-                <div className="flex flex-wrap gap-5">
+                </section>
+                <article className="flex flex-wrap gap-5">
                     <FoodCard
                         name="Greek Salad"
                         price={12.99}
@@ -85,7 +85,7 @@ function ThisWeekSpecials() {
                         description="This comes straight from grandma's recipe book, every last ingredient has been sourced and is as authentic as can be imagined."
                         image="https://images.pexels.com/photos/8085289/pexels-photo-8085289.jpeg?auto=compress&cs=tinysrgb&w=640&h=360&dpr=1"
                     />
-                </div>
+                </article>
             </Container>
         </section>
     )

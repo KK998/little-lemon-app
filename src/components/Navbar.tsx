@@ -14,7 +14,7 @@ type Props = React.PropsWithChildren<{
 
 const Navbar = ({ className, ...props }: Props) => {
     return (
-        <div className={cn("flex items-center h-[120px]", className)} {...props}>
+        <header role='navigation' className={cn("flex items-center h-[120px]", className)} {...props}>
             <Container className='flex items-center justify-between'>
                 <Link to="/">
                     <img src={Logo} alt="company logo" />
@@ -29,7 +29,7 @@ const Navbar = ({ className, ...props }: Props) => {
                     ))}
                 </nav>
             </Container>
-        </div>
+        </header>
     )
 }
 

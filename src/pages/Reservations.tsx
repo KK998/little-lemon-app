@@ -187,15 +187,15 @@ function ReservationConfirmation() {
 
     return (
         <Container className="flex flex-col gap-5 py-16">
-            <div className="flex flex-col gap-0">
+            <section className="flex flex-col gap-0">
                 <Typography tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
                     Table reservation
                 </Typography>
                 <Typography tag={"h2"} type="Sub title" className={colors.text.secondary.black}>
                     Chicago
                 </Typography>
-            </div>
-            <div className="flex flex-col gap-3">
+            </section>
+            <section role="contentinfo" className="flex flex-col gap-3">
                 <ReservationEntry label="First Name" value={formFields.firstName} />
                 <ReservationEntry label="Last Name" value={formFields.lastName} />
                 <ReservationEntry label="Date Of Arrival" value={formattedDate} />
@@ -204,15 +204,15 @@ function ReservationConfirmation() {
                 <ReservationEntry label="Occasion" value={formFields.occasion} />
                 <ReservationEntry label="Alergens" value={formFields.alergens || "No alergens"} />
                 <ReservationEntry label="Additional Notes" value={formFields.notes || "No additional notes"} />
-            </div>
-            <div className="flex flex-wrap items-start justify-start gap-5">
+            </section>
+            <section role="navigation" className="flex flex-wrap items-start justify-start gap-5">
                 <Button kind="white" onClick={handleEditReservation}>
                     Edit reservation
                 </Button>
                 <Button kind="yellow" onClick={handleConfirmReservation}>
                     Confirm reservation
                 </Button>
-            </div>
+            </section>
         </Container>
     )
 }
@@ -237,19 +237,19 @@ function ReservationSuccess() {
 
     return (
         <Container className="flex flex-col justify-center items-center gap-10 grow h-auto">
-            <div className="flex flex-col justify-center text-center gap-0">
+            <section className="flex flex-col justify-center text-center gap-0">
                 <Typography tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
                     Thank you for your reservation!
                 </Typography>
                 <Typography tag={"p"} type="Lead text" className={colors.text.secondary.black}>
                     Show this QR code at reception.
                 </Typography>
-            </div>
-            <div className="flex flex-col items-center justify-center p-5">
+            </section>
+            <aside className="flex flex-col items-center justify-center p-5">
                 <img src={qrUrl.toString()} alt="QR code" className="object-contain" />
-            </div>
-            <Link to="/">
-                <Button>
+            </aside>
+            <Link role="link" to="/">
+                <Button role="link">
                     Back to home
                 </Button>
             </Link>

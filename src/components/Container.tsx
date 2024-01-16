@@ -6,7 +6,7 @@ type Props = React.PropsWithChildren<{
 
 function Container({ className, children, ...props }: Props) {
     return (
-        <div className={cn("mx-auto container", className)} {...props}>{children}</div>
+        <section className={cn("mx-auto container", className)} {...props}>{children}</section>
     )
 }
 

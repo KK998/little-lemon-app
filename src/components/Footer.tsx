@@ -9,9 +9,9 @@ import { Link } from "react-router-dom"
 
 function FooterColumn({ children, className, ...props }: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) {
     return (
-        <div className={cn("flex flex-col flex-grow", className)} {...props}>
+        <section className={cn("flex flex-col flex-grow", className)} {...props}>
             {children}
-        </div>
+        </section>
     )
 }
 
@@ -19,11 +19,11 @@ function FooterLinks({ children, className, title, ...props }: React.PropsWithCh
     title: string
 }>) {
     return (
-        <div className={cn("flex flex-col gap-5", className)} {...props}>
-            <Typography type="Section categories" className={colors.text.secondary.white}>
+        <div role="contentinfo" className={cn("flex flex-col gap-5", className)} {...props}>
+            <Typography type="Section categories" className={colors.text.secondary.white} role="columnheader">
                 {title}
             </Typography>
-            <nav>
+            <nav role="list">
                 {React.Children.map(children, (child) => (
                     <Typography type="Regular text" className={colors.text.secondary.white}>
                         {child}
@@ -43,25 +43,25 @@ function Footer() {
                 </FooterColumn>
                 <FooterColumn>
                     <FooterLinks title="Doormat Navigation">
-                        <Link to="/">Home</Link>
-                        <Link to="/about">About</Link>
-                        <Link to="/menu">Menu</Link>
-                        <Link to="/reservations">Reservations</Link>
-                        <Link to="/order-online">Order online</Link>
-                        <Link to="/login">Login</Link>
+                        <Link role="link" to="/">Home</Link>
+                        <Link role="link" to="/about">About</Link>
+                        <Link role="link" to="/menu">Menu</Link>
+                        <Link role="link" to="/reservations">Reservations</Link>
+                        <Link role="link" to="/order-online">Order online</Link>
+                        <Link role="link" to="/login">Login</Link>
                     </FooterLinks>
                 </FooterColumn>
                 <FooterColumn>
-                    <FooterLinks title="Contact">
-                        <span>Imaginary Streen 3rd Avenue</span>
-                        <span>1000 CA, USA</span>
+                    <FooterLinks role="contentinfo" title="Contact">
+                        <address>Imaginary Streen 3rd Avenue</address>
+                        <address>1000 CA, USA</address>
                         <br />
                         <span>+123 456 789</span>
                         <span>support@littlelemon.com</span>
                     </FooterLinks>
                 </FooterColumn>
                 <FooterColumn>
-                    <FooterLinks title="Social Media Links">
+                    <FooterLinks role="contentinfo" title="Social Media Links">
                         <span>Facebook</span>
                         <span>Instagram</span>
                         <span>LinkedIn</span>

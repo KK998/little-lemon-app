@@ -7,7 +7,7 @@ function Input({ name, type = "text", className, ...props }: React.InputHTMLAttr
 }
 
 function TextArea({ name, className, ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return <textarea className={cn(`outline-none transition-all p-3 font-medium text-base rounded-2xl shadow-xl focus-within:shadow border border-solid border-secondary-white focus-within:border-primary-green`, colors.bg.secondary.white, colors.text.secondary.black, className)} name={name} {...props} />
+  return <textarea aria-multiline="true" className={cn(`outline-none transition-all p-3 font-medium text-base rounded-2xl shadow-xl focus-within:shadow border border-solid border-secondary-white focus-within:border-primary-green`, colors.bg.secondary.white, colors.text.secondary.black, className)} name={name} {...props} />
 }
 
 function Select({ name, className, children, ...props }: React.SelectHTMLAttributes<HTMLSelectElement>) {

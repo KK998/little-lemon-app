@@ -6,13 +6,13 @@ function Default({ children, className }: React.PropsWithChildren<{
     className?: string
 }>) {
     return (
-        <div className="flex flex-col min-h-[100vh]">
+        <main className="flex flex-col min-h-[100vh]">
             <Navbar />
-            <main className={cn("flex flex-col flex-grow", className)}>
+            <section className={cn("flex flex-col flex-grow", className)}>
                 {children}
-            </main>
+            </section>
             <Footer />
-        </div>
+        </main>
     )
 }
 
