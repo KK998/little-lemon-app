@@ -5,6 +5,7 @@ import Container from "./Container"
 import Typography from "./Typography"
 
 import Logo from "../assets/Footer Logo.svg"
+import { Link } from "react-router-dom"
 
 function FooterColumn({ children, className, ...props }: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) {
     return (
@@ -42,19 +43,21 @@ function Footer() {
                 </FooterColumn>
                 <FooterColumn>
                     <FooterLinks title="Doormat Navigation">
-                        <a href="#">Home</a>
-                        <a href="#">About</a>
-                        <a href="#">Menu</a>
-                        <a href="#">Reservations</a>
-                        <a href="#">Order online</a>
-                        <a href="#">Login</a>
+                        <Link to="/">Home</Link>
+                        <Link to="/about">About</Link>
+                        <Link to="/menu">Menu</Link>
+                        <Link to="/reservations">Reservations</Link>
+                        <Link to="/order-online">Order online</Link>
+                        <Link to="/login">Login</Link>
                     </FooterLinks>
                 </FooterColumn>
                 <FooterColumn>
                     <FooterLinks title="Contact">
-                        <span>Address</span>
-                        <span>Phone Number</span>
-                        <span>Email</span>
+                        <span>Imaginary Streen 3rd Avenue</span>
+                        <span>1000 CA, USA</span>
+                        <br />
+                        <span>+123 456 789</span>
+                        <span>support@littlelemon.com</span>
                     </FooterLinks>
                 </FooterColumn>
                 <FooterColumn>
