@@ -28,7 +28,7 @@ type ReservationFormFields = {
     notes?: string
 }
 
-const MAXIMUM_NUMBER_OF_PEOPLE = 50
+export const MAXIMUM_NUMBER_OF_PEOPLE = 50
 
 const DEFAULT_FORM_FIELDS: ReservationFormFields = {
     firstName: "",
@@ -36,7 +36,7 @@ const DEFAULT_FORM_FIELDS: ReservationFormFields = {
     date: new Date().toISOString().split("T")[0], // current date
     time: new Date().toISOString().split("T")[1].split(":").slice(0, 2).join(":"), // current time (hour:minutes)
     numberOfPeople: 1,
-    occasion: "",
+    occasion: "Other",
     alergens: "",
     notes: ""
 };
@@ -63,12 +63,22 @@ function ReservationForm() {
 
     const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        setStep("CONFIRMATION")
+        if (
+            formFields.numberOfPeople <= MAXIMUM_NUMBER_OF_PEOPLE &&
+            formFields.numberOfPeople > 0 &&
+            formFields.firstName.length > 0 &&
+            formFields.lastName.length > 0 &&
+            formFields.date.length > 0 &&
+            formFields.time.length > 0 &&
+            new Date(formFields.date) > new Date()
+        ) {
+            setStep("CONFIRMATION")
+        }
     }
 
     return (
         <section className="flex items-center justify-center py-16">
-            <form onSubmit={handleFormSubmit} className={cn("container mx-auto flex flex-col gap-5 p-16 shadow-xl rounded-2xl", colors.bg.primary.green)}>
+            <form data-testid="reservation-form" onSubmit={handleFormSubmit} className={cn("container mx-auto flex flex-col gap-5 p-16 shadow-xl rounded-2xl", colors.bg.primary.green)}>
                 <FormRow>
                     <FormField label="First Name" name="firstName">
                         <FormField.Input
@@ -78,6 +88,7 @@ function ReservationForm() {
                             onChange={(e) => setFormFields({ ...formFields, firstName: e.target.value })}
                             required
                             placeholder="John"
+                            data-testid="reservation-form--firstname"
                         />
                     </FormField>
                     <FormField label="Last Name" name="lastName">
@@ -88,6 +99,7 @@ function ReservationForm() {
                             onChange={(e) => setFormFields({ ...formFields, lastName: e.target.value })}
                             required
                             placeholder="Doe"
+                            data-testid="reservation-form--lastname"
                         />
                     </FormField>
                 </FormRow>
@@ -99,6 +111,7 @@ function ReservationForm() {
                             value={formFields.date}
                             onChange={(e) => setFormFields({ ...formFields, date: e.target.value })}
                             required
+                            data-testid="reservation-form--date"
                         />
                     </FormField>
                     <FormField label="Time Of Arrival" name="time">
@@ -108,6 +121,7 @@ function ReservationForm() {
                             value={formFields.time}
                             onChange={(e) => setFormFields({ ...formFields, time: e.target.value })}
                             required
+                            data-testid="reservation-form--time"
                         />
                     </FormField>
                 </FormRow>
@@ -121,6 +135,7 @@ function ReservationForm() {
                             min={1}
                             max={MAXIMUM_NUMBER_OF_PEOPLE}
                             required
+                            data-testid="reservation-form--people"
                         />
                     </FormField>
                     <FormField label="Occasion" name="occasion">
@@ -128,7 +143,7 @@ function ReservationForm() {
                             name="occasion"
                             value={formFields.occasion}
                             onChange={(e) => setFormFields({ ...formFields, occasion: e.target.value })}>
-                            <option selected value="Other">Other</option>
+                            <option value="Other">Other</option>
                             <option value="Birthday">Birthday</option>
                             <option value="Anniversary">Anniversary</option>
                             <option value="Business">Business</option>
@@ -158,7 +173,7 @@ function ReservationForm() {
                     </FormField>
                 </FormRow>
                 <FormRow className="mt-5">
-                    <Button kind={"yellow"} className="mx-auto" buttonType="submit">
+                    <Button data-testid="reservation-form--submit" kind={"yellow"} className="mx-auto" buttonType="submit">
                         Reserve table
                     </Button>
                 </FormRow>
@@ -298,7 +313,7 @@ type ReservationContextValue = {
 
 const ReservationContext = createContext<ReservationContextValue | null>(null)
 
-const useReservationContext = () => {
+export const useReservationContext = () => {
     const context = useContext(ReservationContext);
     if (!context) {
         throw new Error("useReservationContext must be used within a ReservationContextProvider")
