@@ -162,6 +162,13 @@ describe("Reservation", () => {
                 const form = screen.queryByTestId("reservation-form");
                 expect(form).not.toBeInTheDocument();
             });
+
+            // These tests are not implemented because api.js script return 404 error...
+            /* it("Correct form data to API - SUCCESS", async () => {
+            });
+
+            it("Invalid form data to API - FAIL", async () => {
+            }); */
         });
     })
 

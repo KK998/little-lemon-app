@@ -25,15 +25,21 @@ function Select({ name, className, children, ...props }: React.SelectHTMLAttribu
 type Props = React.PropsWithChildren<{
   label: string
   name: string
+  error?: Record<string,string>
 }>
 
-function FormField({ children, label, name }: Props) {
+function FormField({ children, label, name, error }: Props) {
   return (
-    <div className='flex flex-col flex-grow gap-2'>
+    <div className={"flex flex-col flex-grow gap-2"}>
       <Typography tag="label" type="Section categories" className={cn(colors.text.secondary.white)} htmlFor={name}>
         {label}:
       </Typography>
-      {children}
+      {error && error[name] ? <div className="border border-red-200 rounded-2xl">{children}</div> : children}
+      {error && error[name] && (
+        <Typography type="Section categories" className={"text-xs leading-snug py-1 italic text-red-400"}>
+          {error[name]}
+        </Typography>
+      )}
     </div>
   )
 }

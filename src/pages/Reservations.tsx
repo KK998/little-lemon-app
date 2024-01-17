@@ -12,7 +12,6 @@ import Default from "../layouts/Default"
 
 import cn from "../util/cn";
 import colors from "../util/colors";
-import { getCurrentRoudedTime } from "../util/time";
 import useReservationForm from "../util/useReservationForm";
 import useReservationConfirmation from "../util/useReservationConfirmation";
 import useReservationSuccess from "../util/useReservationSuccess";
@@ -45,7 +44,7 @@ export const DEFAULT_FORM_FIELDS: ReservationFormFields = {
     firstName: "",
     lastName: "",
     date: new Date().toISOString().split("T")[0], // current date
-    time: getCurrentRoudedTime(), // current time (hour:minutes)
+    time: "", // current time (hour:minutes)
     numberOfPeople: 1,
     occasion: "Other",
     alergens: "",
@@ -92,7 +91,8 @@ function ReservationForm() {
         formFields,
         setFormFields,
         defaultFormFieldChangeHandler,
-        textareaChangeHandler
+        textareaChangeHandler,
+        formErrors
     } = useReservationForm();
 
     return (
@@ -109,10 +109,11 @@ function ReservationForm() {
             <section className="flex items-center justify-center py-16">
                 <form data-testid="reservation-form" onSubmit={handleFormSubmit} className={cn("container mx-auto flex flex-col gap-5 p-16 shadow-xl rounded-2xl", colors.bg.primary.green)}>
                     <FormRow>
-                        <FormField label="First Name" name="firstName">
+                        <FormField label="First Name" name="firstName" error={formErrors}>
                             <FormField.Input
                                 name="firstName"
                                 type="text"
+                                aria-label="First Name"
                                 value={formFields.firstName}
                                 onChange={defaultFormFieldChangeHandler}
                                 required
@@ -120,10 +121,11 @@ function ReservationForm() {
                                 data-testid="reservation-form--firstname"
                             />
                         </FormField>
-                        <FormField label="Last Name" name="lastName">
+                        <FormField label="Last Name" name="lastName" error={formErrors}>
                             <FormField.Input
                                 name="lastName"
                                 type="text"
+                                aria-label="Last Name"
                                 value={formFields.lastName}
                                 onChange={defaultFormFieldChangeHandler}
                                 required
@@ -133,20 +135,22 @@ function ReservationForm() {
                         </FormField>
                     </FormRow>
                     <FormRow>
-                        <FormField label="Date Of Arrival" name="date">
+                        <FormField label="Date Of Arrival" name="date" error={formErrors}>
                             <FormField.Input
                                 name="date"
                                 type="date"
+                                aria-label="Date Of Arrival"
                                 value={formFields.date}
                                 onChange={defaultFormFieldChangeHandler}
                                 required
                                 data-testid="reservation-form--date"
                             />
                         </FormField>
-                        <FormField label="Time Of Arrival" name="time">
+                        <FormField label="Time Of Arrival" name="time" error={formErrors}>
                             <FormField.Input
                                 name="time"
                                 type="time"
+                                aria-label="Time Of Arrival"
                                 value={formFields.time}
                                 onChange={(e) => {
                                     if (!allowedTimes.includes(e.target.value)) {
@@ -160,10 +164,11 @@ function ReservationForm() {
                         </FormField>
                     </FormRow>
                     <FormRow>
-                        <FormField label="Number Of People" name="numberOfPeople">
+                        <FormField label="Number Of People" name="numberOfPeople" error={formErrors}>
                             <FormField.Input
                                 name="numberOfPeople"
                                 type="number"
+                                aria-label="Number Of People"
                                 value={formFields.numberOfPeople}
                                 onChange={(e) => setFormFields({ ...formFields, numberOfPeople: Number(e.target.value) })}
                                 min={1}
@@ -172,9 +177,10 @@ function ReservationForm() {
                                 data-testid="reservation-form--people"
                             />
                         </FormField>
-                        <FormField label="Occasion" name="occasion">
+                        <FormField label="Occasion" name="occasion" error={formErrors}>
                             <FormField.Select
                                 name="occasion"
+                                aria-label="Occasion"
                                 value={formFields.occasion}
                                 onChange={(e) => setFormFields({ ...formFields, occasion: e.target.value })}>
                                 <option value="Other">Other</option>
@@ -186,9 +192,10 @@ function ReservationForm() {
                         </FormField>
                     </FormRow>
                     <FormRow>
-                        <FormField label="Alergens" name="alergens">
+                        <FormField label="Alergens" name="alergens" error={formErrors}>
                             <FormField.TextArea
                                 name="alergens"
+                                aria-label="Alergens"
                                 value={formFields.alergens}
                                 onChange={textareaChangeHandler}
                                 placeholder="No alergens"
@@ -196,9 +203,10 @@ function ReservationForm() {
                         </FormField>
                     </FormRow>
                     <FormRow>
-                        <FormField label="Additional Notes" name="notes">
+                        <FormField label="Additional Notes" name="notes" error={formErrors}>
                             <FormField.TextArea
                                 name="notes"
+                                aria-label="Additional Notes"
                                 value={formFields.notes}
                                 onChange={textareaChangeHandler}
                                 rows={5}
@@ -207,7 +215,7 @@ function ReservationForm() {
                         </FormField>
                     </FormRow>
                     <FormRow className="mt-5">
-                        <Button data-testid="reservation-form--submit" kind={"yellow"} className="mx-auto" buttonType="submit">
+                        <Button aria-label="Reserva table" data-testid="reservation-form--submit" kind={"yellow"} className="mx-auto" buttonType="submit">
                             Reserve table
                         </Button>
                     </FormRow>
@@ -246,10 +254,10 @@ function ReservationConfirmation() {
                 <ReservationEntry label="Additional Notes" value={formFields.notes || "No additional notes"} />
             </section>
             <section data-testid="confirmation--buttons" role="navigation" className="flex flex-wrap items-start justify-start gap-5">
-                <Button kind="white" onClick={handleEditReservation} data-testid="confirmation--edit-reservation">
+                <Button aria-label="Return to previous step" kind="white" onClick={handleEditReservation} data-testid="confirmation--edit-reservation">
                     Edit reservation
                 </Button>
-                <Button kind="yellow" onClick={handleConfirmReservation} data-testid="confirmation--confirm-reservation">
+                <Button aria-label="Confirm reservation" kind="yellow" onClick={handleConfirmReservation} data-testid="confirmation--confirm-reservation">
                     Confirm reservation
                 </Button>
             </section>
@@ -274,7 +282,7 @@ function ReservationSuccess() {
                 <img data-testid="reservation-success--qr-code" src={qrUrl.toString()} alt="QR code" className="object-contain" />
             </aside>
             <Link data-testid="reservation-success--link" role="link" to="/">
-                <Button role="link">
+                <Button aria-label="Return to home page" role="link">
                     Back to home
                 </Button>
             </Link>
