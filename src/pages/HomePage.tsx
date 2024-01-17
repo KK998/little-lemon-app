@@ -48,9 +48,9 @@ function HeroSection() {
 
 function ThisWeekSpecials() {
     return (
-        <section data-testid="specials-section" className="flex flex-col gap-10 py-16">
+        <section data-testid="specials-section" className="flex flex-col gap-10 p-4 md:py-16 md:px-0">
             <Container>
-                <section className="flex justify-between items-center mb-10">
+                <section className="flex flex-col md:flex-row justify-between md:items-center mb-10">
                     <Typography data-testid="specials-section--title" tag="h3" type="Display title" className={colors.text.secondary.black}>
                         This week's specials!
                     </Typography>
