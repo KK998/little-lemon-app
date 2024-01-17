@@ -40,8 +40,8 @@ const Navbar = ({ className, ...props }: Props) => {
                 </Container>
             </header>
 
-            <header data-testid="navbar-mobile" role='navigation' className={cn("flex flex-col relative sm:hidden", className)} {...props}>
-                <Container className='flex justify-between items-center p-4'>
+            <header data-testid="navbar-mobile" role='navigation' className={cn("flex flex-col w-full relative sm:hidden", className)} {...props}>
+                <Container className='flex justify-between items-center p-4 overflow-hidden'>
                     <Link to="/">
                         <img src={Logo} alt="company logo" />
                     </Link>

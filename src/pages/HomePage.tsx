@@ -16,8 +16,13 @@ import About from "../components/About";
 
 function HeroSection() {
     return (
-        <section data-testid="hero-section" className={cn("flex items-center justify-center py-10 mb-20", colors.bg.primary.green)}>
-            <Container className="relative">
+        <section data-testid="hero-section" className={cn("flex flex-col md:flex-row items-center justify-center py-10 mb-20", colors.bg.primary.green)}>
+            <Container className="relative md:px-0 px-4">
+                <img loading="eager"
+                    className="md:absolute md:right-0 md:top-0 w-[380px] md:h-[450px] rounded-xl max-w-full object-cover mb-4 md:mb-0"
+                    src={HomePageHero}
+                    alt="Man with food"
+                />
                 <section className="flex flex-col gap-5 max-w-full sm:max-w-sm mr-auto">
                     <div className="flex flex-col gap-0">
                         <Typography data-testid="hero-section--title" tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
@@ -36,11 +41,6 @@ function HeroSection() {
                         </Link>
                     </Button>
                 </section>
-                <img loading="eager"
-                    className="absolute right-0 top-0 w-[380px] h-[450px] rounded-xl max-w-full object-cover"
-                    src={HomePageHero}
-                    alt="Man with food"
-                />
             </Container>
         </section>
     );
