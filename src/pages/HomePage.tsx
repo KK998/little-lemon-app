@@ -16,7 +16,7 @@ import About from "../components/About";
 
 function HeroSection() {
     return (
-        <section data-testid="hero-section" className={cn("flex flex-col md:flex-row items-center justify-center py-10 mb-20", colors.bg.primary.green)}>
+        <section data-testid="hero-section" className={cn("flex flex-col md:flex-row items-center justify-center py-10 md:mb-20", colors.bg.primary.green)}>
             <Container className="relative md:px-0 px-4">
                 <img loading="eager"
                     className="md:absolute md:right-0 md:top-0 w-[380px] md:h-[450px] rounded-xl max-w-full object-cover mb-4 md:mb-0"
@@ -32,7 +32,7 @@ function HeroSection() {
                             Chicago
                         </Typography>
                     </div>
-                    <Typography type="Lead text" className={cn(colors.text.secondary.white, "w-[210px] max-w-full")}>
+                    <Typography type="Lead text" className={cn(colors.text.secondary.white, "md:w-[210px] max-w-full")}>
                         We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.
                     </Typography>
                     <Button data-testid="hero-section--link" kind="yellow" className="w-[250px] max-w-full whitespace-nowrap" role="link">
@@ -54,7 +54,7 @@ function ThisWeekSpecials() {
                     <Typography data-testid="specials-section--title" tag="h3" type="Display title" className={colors.text.secondary.black}>
                         This week's specials!
                     </Typography>
-                    <Button kind="yellow" data-testid="specials-section--link">
+                    <Button kind="yellow" className="mt-4 md:mt-0" data-testid="specials-section--link">
                         <Link to={"/menu"}>
                             Online Menu
                         </Link>

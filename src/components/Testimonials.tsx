@@ -40,7 +40,7 @@ function TestimonialCard({
 
 function Testimonials() {
     return (
-        <section data-testid="testimonials" className={cn('flex flex-col items-center justify-center gap-5 py-32', colors.bg.primary.green)}>
+        <section data-testid="testimonials" className={cn('flex flex-col items-center justify-center gap-5 py-10 px-4 mx:px-0 md:py-32', colors.bg.primary.green)}>
             <Typography data-testid="testimonials--title" tag="h3" type='Display title' className={colors.text.secondary.white}>
                 Testimonials
             </Typography>
