@@ -27,6 +27,8 @@ function useReservationForm() {
             formFields.time.length > 0 &&
             new Date(formFields.date) > new Date()
         ) {
+            // here we would send the data to the backend
+            // if the script was working, we would have a submitAPI(formData) function that would send the data to the backend
             setStep("CONFIRMATION")
         }
     }
