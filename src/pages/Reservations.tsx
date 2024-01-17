@@ -106,8 +106,8 @@ function ReservationForm() {
                     To reserve the table with us, please enter the required information below.
                 </Typography>
             </Hero>
-            <section className="flex items-center justify-center py-16">
-                <form data-testid="reservation-form" onSubmit={handleFormSubmit} className={cn("container mx-auto flex flex-col gap-5 p-16 shadow-xl rounded-2xl", colors.bg.primary.green)}>
+            <section className="flex items-center justify-center md:py-16">
+                <form data-testid="reservation-form" onSubmit={handleFormSubmit} className={cn("container mx-auto flex flex-col gap-5 p-4 md:p-16 shadow-xl md:rounded-2xl", colors.bg.primary.green)}>
                     <FormRow>
                         <FormField label="First Name" name="firstName" error={formErrors}>
                             <FormField.Input
@@ -234,7 +234,7 @@ function ReservationConfirmation() {
     } = useReservationConfirmation();
 
     return (
-        <Container data-testid="confirmation" className="flex flex-col gap-5 py-16">
+        <Container data-testid="confirmation" className="flex flex-col gap-5 p-4 md:px-0 md:py-16">
             <section className="flex flex-col gap-0">
                 <Typography tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
                     Table reservation
@@ -269,7 +269,7 @@ function ReservationSuccess() {
     const { qrUrl } = useReservationSuccess();
 
     return (
-        <Container data-testid="reservation-success" className="flex flex-col justify-center items-center gap-10 grow h-auto">
+        <Container data-testid="reservation-success" className="flex flex-col justify-center items-center gap-10 grow h-auto py-4 md:py-0">
             <section className="flex flex-col justify-center text-center gap-0">
                 <Typography data-testid="reservation-success--title" tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
                     Thank you for your reservation!
