@@ -36,9 +36,9 @@ function FooterLinks({ children, className, title, ...props }: React.PropsWithCh
 
 function Footer() {
     return (
-        <footer data-testid="footer" className={cn("flex items-center justify-center py-10", colors.bg.primary.green)}>
+        <footer data-testid="footer" className={cn("flex items-center justify-center px-4 py-10 md:px-0", colors.bg.primary.green)}>
             <Container className="flex flex-row flex-wrap gap-10">
-                <FooterColumn>
+                <FooterColumn className="hidden md:flex">
                     <img data-testid="footer-logo" height={`250px`} width={`150px`} src={Logo} alt="company logo" />
                 </FooterColumn>
                 <FooterColumn>
@@ -66,6 +66,9 @@ function Footer() {
                         <span>Instagram</span>
                         <span>LinkedIn</span>
                     </FooterLinks>
+                </FooterColumn>
+                <FooterColumn className="md:hidden">
+                    <img data-testid="footer-logo-mobile" className="object-contain w-1/2 mx-auto" src={Logo} alt="company logo" />
                 </FooterColumn>
             </Container>
         </footer>
