@@ -36,11 +36,8 @@ function HeroSection() {
                         </Link>
                     </Button>
                 </section>
-                <img
-                    height={`353px`}
-                    width={`380px`}
-                    loading="eager"
-                    className="absolute right-0 top-0 max-w-full object-cover"
+                <img loading="eager"
+                    className="absolute right-0 top-0 w-[380px] h-[450px] rounded-xl max-w-full object-cover"
                     src={HomePageHero}
                     alt="Man with food"
                 />

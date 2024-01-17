@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Hero from "../components/Hero"
@@ -42,19 +42,19 @@ const DEFAULT_FORM_FIELDS: ReservationFormFields = {
 };
 
 function FormRow({ children, className, ...props }: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) {
-    return <div className={cn("flex flex-wrap gap-5", className)} {...props}>{children}</div>
+    return <section className={cn("flex flex-wrap gap-5", className)} {...props}>{children}</section>
 }
 
 function ReservationEntry({ label, value }: { label: string, value: string | number }) {
     return (
-        <div className="flex flex-col">
-            <Typography tag="p" type="Section categories" className={cn(colors.text.secondary.black)}>
+        <section className="flex flex-col">
+            <Typography tag="p" type="Section categories" className={cn(colors.text.secondary.black)} data-testid="confirmation--field-label">
                 {label}:
             </Typography>
             <Typography tag="p" type="Lead text" className={cn(colors.text.secondary.black)}>
                 {value}
             </Typography>
-        </div>
+        </section>
     )
 }
 
@@ -201,7 +201,7 @@ function ReservationConfirmation() {
     }), [formFields.date])
 
     return (
-        <Container className="flex flex-col gap-5 py-16">
+        <Container data-testid="confirmation" className="flex flex-col gap-5 py-16">
             <section className="flex flex-col gap-0">
                 <Typography tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
                     Table reservation
@@ -210,7 +210,7 @@ function ReservationConfirmation() {
                     Chicago
                 </Typography>
             </section>
-            <section role="contentinfo" className="flex flex-col gap-3">
+            <section data-testid="confirmation--fields" role="contentinfo" className="flex flex-col gap-3">
                 <ReservationEntry label="First Name" value={formFields.firstName} />
                 <ReservationEntry label="Last Name" value={formFields.lastName} />
                 <ReservationEntry label="Date Of Arrival" value={formattedDate} />
@@ -220,11 +220,11 @@ function ReservationConfirmation() {
                 <ReservationEntry label="Alergens" value={formFields.alergens || "No alergens"} />
                 <ReservationEntry label="Additional Notes" value={formFields.notes || "No additional notes"} />
             </section>
-            <section role="navigation" className="flex flex-wrap items-start justify-start gap-5">
-                <Button kind="white" onClick={handleEditReservation}>
+            <section data-testid="confirmation--buttons" role="navigation" className="flex flex-wrap items-start justify-start gap-5">
+                <Button kind="white" onClick={handleEditReservation} data-testid="confirmation--edit-reservation">
                     Edit reservation
                 </Button>
-                <Button kind="yellow" onClick={handleConfirmReservation}>
+                <Button kind="yellow" onClick={handleConfirmReservation} data-testid="confirmation--confirm-reservation">
                     Confirm reservation
                 </Button>
             </section>
@@ -234,6 +234,10 @@ function ReservationConfirmation() {
 
 function ReservationSuccess() {
     const { formFields, setFormFields } = useReservationContext()
+
+    useEffect(() => {
+        setFormFields(DEFAULT_FORM_FIELDS);
+    }, [setFormFields]);
 
     const qrUrl = new URL("https://api.qrserver.com/v1/create-qr-code/");
     qrUrl.searchParams.append("size", "250x250");
@@ -248,22 +252,20 @@ function ReservationSuccess() {
         "Additional notes": formFields.notes
     }));
 
-    setFormFields(DEFAULT_FORM_FIELDS);
-
     return (
-        <Container className="flex flex-col justify-center items-center gap-10 grow h-auto">
+        <Container data-testid="reservation-success" className="flex flex-col justify-center items-center gap-10 grow h-auto">
             <section className="flex flex-col justify-center text-center gap-0">
-                <Typography tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
+                <Typography data-testid="reservation-success--title" tag={"h1"} type="Display title" className={colors.text.primary.yellow}>
                     Thank you for your reservation!
                 </Typography>
-                <Typography tag={"p"} type="Lead text" className={colors.text.secondary.black}>
+                <Typography data-testid="reservation-success--message" tag={"p"} type="Lead text" className={colors.text.secondary.black}>
                     Show this QR code at reception.
                 </Typography>
             </section>
             <aside className="flex flex-col items-center justify-center p-5">
-                <img src={qrUrl.toString()} alt="QR code" className="object-contain" />
+                <img data-testid="reservation-success--qr-code" src={qrUrl.toString()} alt="QR code" className="object-contain" />
             </aside>
-            <Link role="link" to="/">
+            <Link data-testid="reservation-success--link" role="link" to="/">
                 <Button role="link">
                     Back to home
                 </Button>
