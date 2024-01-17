@@ -22,7 +22,7 @@ type Props = React.PropsWithChildren<React.HTMLAttributes<HTMLButtonElement> & V
 
 function Button({ children, className, kind, buttonType, ...props }: Props) {
     return (
-        <button className={ButtonVariants({ kind, className })} type={buttonType} {...props}>
+        <button className={cn(ButtonVariants({ kind }), className)} type={buttonType} {...props}>
             <Typography type="Card title">
                 {children}
             </Typography>
